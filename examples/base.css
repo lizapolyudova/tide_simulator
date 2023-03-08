@@ -1,0 +1,8 @@
+.stats {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+    background-color: darkblue;
+    color: white;
+}
