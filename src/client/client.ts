@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import * as utils from './utils'
 
-// import * as utils from "../lib/utils.js"
+// import * as utils from "../lib/utils.ts"
 
 // this file contains small examples which can be toggled on/off
 // to quickly experiment
@@ -50,7 +51,7 @@ camera.position.z = 10;
 
 function animate() {
     // create a small debug printout
-    // printCamera(camera, stats);
+    utils.printCamera(camera, stats);
 
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
