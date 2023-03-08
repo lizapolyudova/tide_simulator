@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+
 // import * as utils from "../lib/utils.js"
 
 // this file contains small examples which can be toggled on/off
@@ -18,13 +20,13 @@ stats.className = "stats"
 stats.innerHTML = "some stats here"
 document.body.appendChild(stats);
 
-const axesHelper = new THREE.AxesHelper(5);
+const axesHelper = new THREE.AxesHelper(50);
 scene.add(axesHelper);
 
 
 //Orbit Controls
-// var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
-
+// var orbitControls = new OrbitControls(camera, renderer.domElement);
+new OrbitControls(camera, renderer.domElement)
 // Lights
 var light = new THREE.AmbientLight(0xffddaa, 1)
 scene.add(light);
