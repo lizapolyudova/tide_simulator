@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import * as utils from './utils'
+import * as planets from "./planets";
+import {earth_radius} from "./params";
 
 // import * as utils from "../lib/utils.ts"
 
@@ -10,7 +12,9 @@ import * as utils from './utils'
 
 // Setup rendered
 var scene = new THREE.Scene();
+scene.background = new THREE.Color(0x00dddd);
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+
 
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -29,15 +33,16 @@ scene.add(axesHelper);
 // var orbitControls = new OrbitControls(camera, renderer.domElement);
 new OrbitControls(camera, renderer.domElement)
 // Lights
-var light = new THREE.AmbientLight(0xffddaa, 1)
+var light = new THREE.SpotLight(0xffddaa, 1)
+light.position.set(2 * earth_radius, 2 * earth_radius, 2 * earth_radius);
 scene.add(light);
+
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper(light, sphereSize);
+scene.add(pointLightHelper);
 
 const material = new THREE.MeshNormalMaterial({});
 
-// Large sphere
-const geometry1 = new THREE.SphereGeometry(3, 40, 40);
-const large = new THREE.Mesh(geometry1, material);
-scene.add(large);
 
 // Small sphere
 const geometry2 = new THREE.SphereGeometry(1, 40, 40);
@@ -45,8 +50,12 @@ const small = new THREE.Mesh(geometry2, material);
 small.position.set(5, 5, 5);
 scene.add(small);
 
-
-camera.position.z = 10;
+planets.earth.add(camera);
+camera.position.x = -earth_radius / 2;
+camera.position.y = -earth_radius / 2;
+camera.position.z = -earth_radius / 2;
+camera.lookAt(small.position);
+scene.add(planets.earth)
 
 
 function animate() {
