@@ -6,7 +6,7 @@ export var earth_radius = 1.5;
 export var moon_radius = .7;
 export var sun_radius = 5;
 export var earth_orbit_radius = 25;
-export var moon_orbit_radius = 6;
+export var moon_orbit_radius = 8;
 
 if (realistic) {
     earth_radius = 1;

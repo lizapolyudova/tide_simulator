@@ -13,9 +13,16 @@ import * as planets from "./planets";
 
 //Camera, scene, and renderer
 var scene = new THREE.Scene();
+const loader = new THREE.TextureLoader();
+loader.load('https://c.pxhere.com/photos/1a/9d/stars_background_blue_photoshop_color_space_sky_dark-610854.jpg!d' , function(texture)
+{
+    console.log("ready!");
+    scene.background = texture;
+});
 
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearAlpha(0);
 document.body.appendChild(renderer.domElement);
 
 
