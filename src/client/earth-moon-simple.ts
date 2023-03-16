@@ -3,9 +3,10 @@ import * as THREE from 'three';
 import * as cameras from './cameras'
 import {printCamera} from "./utils";
 import {sun, earth, moon} from "./planets";
-import {earth_orbit_radius, moon_orbit_radius, daily_delta, moon_delta, earth_delta} from "./params";
+import {moon_radius, earth_orbit_radius, moon_orbit_radius, daily_delta, moon_delta, earth_delta} from "./params";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {activeCam, moonCam} from "./cameras";
+import { GUI } from 'dat.gui';
+import {activeCam, moonCam, staticCam} from "./cameras";
 import * as planets from "./planets";
 
 
@@ -52,12 +53,18 @@ earthOrbit.add(earth);
 earthOrbit.add(moonOrbit);
 scene.add(earthOrbit);
 
-var control;
+
 
 function init() {
     cameras.helpers(scene, renderer);
     // call the render function
     render();
+
+    const gui = new GUI();
+    const planetsFolder = gui.addFolder('Planets');
+    // planetsFolder.add(moon_radius, 'moon radius', .1, 2);
+    planetsFolder.open();
+
 }
 
 

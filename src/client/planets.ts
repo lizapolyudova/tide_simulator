@@ -3,6 +3,7 @@ import * as THREE from "three";
 import * as params from "./params";
 import {moon_radius, sun_radius} from "./params";
 
+
 // Sun
 var sunGeometry = new THREE.SphereGeometry(sun_radius, 50, 50);
 var sunMaterial = new THREE.MeshPhongMaterial({
