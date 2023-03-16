@@ -2,8 +2,11 @@
 
 ## Current Todos
 
+- [ ] start/pause
+- [ ] toggleable printout for all coordinates
+
 - [ ] dynamic controls
-- [ ] multiple views
+- [x] multiple views
 
 - [x] groups rotating correctly; maybe encode all orbiting as rotation around axis instead of angle-based manual calculations
 - [x] geo-static camera rotates with the earth

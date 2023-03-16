@@ -28,8 +28,8 @@ function generateTexture() {
     // draw gradient
     context.rect(0, 0, size, size);
     var gradient = context.createLinearGradient(0, 0, size, size);
-    gradient.addColorStop(0, "#00ff00"); // light blue
-    gradient.addColorStop(1, "#ff0000"); // dark red
+    gradient.addColorStop(0, "#2c7c2c"); // light blue
+    gradient.addColorStop(1, "#0077ff"); // dark red
     context.fillStyle = gradient;
     context.fill();
 
@@ -57,11 +57,13 @@ var atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 var moonGeometry = new THREE.SphereGeometry(moon_radius, 50, 50);
 var moonMaterial = new THREE.MeshPhongMaterial({
     color: 0x0000ff,
+    emissiveIntensity: .005,
+    emissive: 0xfffff,
     shininess: 1,
 });
 
 var moon = new THREE.Mesh(moonGeometry, moonMaterial);
 var earth = new THREE.Mesh(earthGeometry, earthMaterial);
-earth.add(atmosphere);
+// earth.add(atmosphere);
 
 export {sun, earth, moon};

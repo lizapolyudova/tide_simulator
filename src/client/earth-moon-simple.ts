@@ -5,7 +5,8 @@ import {printCamera} from "./utils";
 import {sun, earth, moon} from "./planets";
 import {earth_orbit_radius, moon_orbit_radius, daily_delta, moon_delta, earth_delta} from "./params";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {activeCam} from "./cameras";
+import {activeCam, moonCam} from "./cameras";
+import * as planets from "./planets";
 
 
 // add controls
@@ -34,6 +35,8 @@ const moonOrbit = new THREE.Object3D();
 moonOrbit.position.set(earth.position.x, earth.position.y, earth.position.z);
 moonOrbit.add(moon);
 moonOrbit.add(cameras.moonCam);
+moonCam.lookAt(moon.getWorldPosition(new THREE.Vector3()));
+
 
 // earthOrbit object manages rotating around the sun together with the earth.
 const earthOrbit = new THREE.Object3D();
@@ -53,6 +56,7 @@ function init() {
 
 //Render loop
 var render = function () {
+    cameras.updateSize(renderer)
 
 
     function calculateOrbits() {
@@ -63,19 +67,19 @@ var render = function () {
     }
 
     calculateOrbits()
-    renderer.render(scene, cameras.activeCam);
 
+    cameras.setupCamera(scene, renderer, cameras.staticCam, 0);
+    cameras.setupCamera(scene, renderer, cameras.activeCam, 1);
 };
 
 
 var stats = document.createElement('div');
 stats.className = "stats"
-stats.innerHTML = "some stats here"
 document.body.appendChild(stats);
 
 
 function animate() {
-    printCamera(cameras.activeCam, stats);
+    // printCamera(cameras.activeCam, stats);
     requestAnimationFrame(animate);
     render();
 

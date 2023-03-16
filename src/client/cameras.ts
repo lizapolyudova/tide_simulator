@@ -6,15 +6,39 @@ import {earth_orbit_radius, earth_radius, moon_orbit_radius} from "./params";
 
 
 var staticCam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, earth_orbit_radius * 10);
-var dailyCam = new THREE.PerspectiveCamera(20, 3*window.innerWidth / window.innerHeight, earth_radius * .025
-    , earth_orbit_radius*1.2);
-var moonCam = new THREE.PerspectiveCamera(20, 3*window.innerWidth / window.innerHeight, earth_radius * .025
-    , earth_orbit_radius*1.2);
-staticCam.position.set(0, earth_orbit_radius * 3, earth_orbit_radius * 3);
+var dailyCam = new THREE.PerspectiveCamera(20, window.innerWidth / 2 / window.innerHeight, earth_radius * .025
+    , earth_orbit_radius * 1.2);
+var moonCam = new THREE.PerspectiveCamera(20, window.innerWidth / 2 / window.innerHeight, earth_radius * .025
+    , earth_orbit_radius * .6);
+staticCam.position.set(0, earth_orbit_radius * 1.5, earth_orbit_radius * 1.5);
 
 
-var activeCam = staticCam;
+var activeCam = moonCam;
 var enableHelpers = false;
+
+var windowWidth: number;
+var windowHeight: number;
+
+function updateSize(renderer: THREE.WebGLRenderer) {
+
+    if (windowWidth != window.innerWidth || windowHeight != window.innerHeight) {
+
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight;
+
+        renderer.setSize(windowWidth, windowHeight);
+    }
+
+}
+
+function setupCamera(scene: THREE.Scene, renderer: THREE.WebGLRenderer, camera: THREE.PerspectiveCamera, index: number) {
+    renderer.setViewport(index * windowWidth / 2, 0, windowWidth / 2, windowHeight);
+    renderer.setScissor(index * windowWidth / 2, 0, windowWidth / 2, windowHeight);
+    renderer.setScissorTest(true);
+
+    camera.aspect = windowWidth / windowHeight;
+    renderer.render(scene, camera)
+}
 
 function helpers(scene: THREE.Scene, renderer: THREE.Renderer) {
     scene.add(staticCam);
@@ -25,7 +49,7 @@ function helpers(scene: THREE.Scene, renderer: THREE.Renderer) {
 
         scene.add(staticHelper);
         scene.add(moonCamHelper);
-        scene.add(dailyCamHelper);
+        // scene.add(dailyCamHelper);
 
         const axesHelper = new THREE.AxesHelper(100);
         scene.add(axesHelper);
@@ -38,10 +62,9 @@ function helpers(scene: THREE.Scene, renderer: THREE.Renderer) {
 dailyCam.position.z = -1 * params.earth_radius;
 planets.earth.add(dailyCam);
 
-moonCam.lookAt(planets.moon.position);
-moonCam.position.z = -1 * params.earth_radius;
+moonCam.position.x = params.earth_radius * 1.2;
 
-export {moonCam, activeCam, helpers};
+export {moonCam, activeCam, staticCam, helpers, setupCamera, updateSize};
 
 
 
