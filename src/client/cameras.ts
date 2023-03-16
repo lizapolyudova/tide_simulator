@@ -14,7 +14,7 @@ staticCam.position.set(0, earth_orbit_radius * 1.5, earth_orbit_radius * 1.5);
 
 
 var activeCam = moonCam;
-var enableHelpers = false;
+var enableHelpers = true;
 
 var windowWidth: number;
 var windowHeight: number;
@@ -52,7 +52,7 @@ function helpers(scene: THREE.Scene, renderer: THREE.Renderer) {
         // scene.add(dailyCamHelper);
 
         const axesHelper = new THREE.AxesHelper(100);
-        scene.add(axesHelper);
+        // scene.add(axesHelper);
     }
     //Orbit Controls
     new OrbitControls(staticCam, renderer.domElement);
@@ -62,7 +62,7 @@ function helpers(scene: THREE.Scene, renderer: THREE.Renderer) {
 dailyCam.position.z = -1 * params.earth_radius;
 planets.earth.add(dailyCam);
 
-moonCam.position.x = params.earth_radius * 1.2;
+moonCam.position.x = params.earth_radius;
 
 export {moonCam, activeCam, staticCam, helpers, setupCamera, updateSize};
 
