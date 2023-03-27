@@ -1,4 +1,5 @@
 .idea/*
 node_modules/
 demos/
+dist/client/bundle.js
 package-lock.json
