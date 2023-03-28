@@ -7,6 +7,14 @@
     color: white;
 }
 
+.content {
+    width: 90%;
+    position: center;
+    background-color: rgba(115, 180, 193, 0.71);
+    margin: 30px;
+    padding: 20px;
+}
+
 .menu {
     display: flex;
     flex-direction: row;
