@@ -1,7 +1,10 @@
 const path = require('path')
 
 module.exports = {
-    entry: './src/client/earth-moon-simple.ts',
+    entry: {
+        moon: './src/client/spheres/earth-moon-simple.ts',
+        trees: './src/client/trees-with-faces.ts',
+    },
     // entry: './src/client/unit.ts',
     module: {
         rules: [
@@ -16,7 +19,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../../dist/client'),
     },
 }

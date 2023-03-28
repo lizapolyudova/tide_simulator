@@ -6,3 +6,40 @@
     background-color: darkblue;
     color: white;
 }
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    background-color: aquamarine;
+
+}
+
+.menu > .item {
+    width: 20%;
+    background-color: rgba(59, 87, 62, 0.71);
+}
+
+
+.menu > .item > a {
+    color: rgba(231, 239, 235, 0.71);
+}
+
+.gallery {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.header {
+    padding: 10px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.gallery > .item {
+    max-width: 30%;
+    padding: 20px;
+    border: solid 1px black;
+}
