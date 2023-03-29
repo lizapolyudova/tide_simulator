@@ -2,6 +2,13 @@
 
 ## Current Todos
 
+### Website
+
+- [ ] lock down the s3 bucket & figure out permissioning
+- [ ] trees with faces - add sketches which show up on top? overlay?
+- [ ] audio journaling - model after the syllabus project. make either interactive or make a flow chart. be instructive, follow your own instructions.
+
+### Moon Simulation
 - [ ] start/pause
 - [ ] toggleable printout for all coordinates
 
@@ -16,6 +23,15 @@
 - [ ] day/night cycle
 
 ## Dailies
+
+### 29-03-2023
+
+Getting a bit out of control, since this is now becoming just a personal website instead of just a simulation. I might have to split things up a bit.
+
+That being said, I am currently at https://pacific-snail.netlify.app
+
+Been working on it for the past two days.
+Adding some 
 
 ### 16-03-2023
 
