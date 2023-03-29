@@ -1,3 +1,5 @@
+import * as $ from 'jquery';
+
 var makeMenuItem = function (name: string, path: string) {
     var item = document.createElement('div');
     item.className = "item"
@@ -5,18 +7,28 @@ var makeMenuItem = function (name: string, path: string) {
     return item
 }
 
+$(function () {
+    console.log("in the data-include function")
+    var includes = $('[data-include]')
+    $.each(includes, function () {
+        var file = 'views/' + $(this).data('include') + '.html'
+        $(this).load(file)
+    })
+})
+
 export function init() {
     document.addEventListener('DOMContentLoaded', (event) => {
+
         var menu = document.createElement('div');
-        menu.className = "menu"
+        menu.setAttribute("data-include", "menu");
+        menu.setAttribute("class", "left");
         menu.appendChild(makeMenuItem("Home", "/"))
-        var firstNode = document.body.getElementsByTagName("script").item(0);
-        // if (firstNode === null) {
-        //     console.log("no children in the DOM")
-        //     document.body.appendChild(menu);
-        // } else {
-        //     var before = firstNode.nextSibling;
-        //     document.body.insertBefore(before, menu);
-        // }
+        var firstNode = document.body.getElementsByTagName("div").item(0);
+        if (firstNode === null) {
+            console.log("no children in the DOM")
+            document.body.appendChild(menu);
+        } else {
+            document.body.insertBefore(menu, firstNode);
+        }
     })
 }

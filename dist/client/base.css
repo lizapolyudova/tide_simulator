@@ -7,12 +7,33 @@
     color: white;
 }
 
+.left {
+    width: 10%;
+    height: 100%;
+    background-color: rgba(152, 145, 121, 0.71);
+}
+
+.right {
+    width: 70%;
+    height: 100%;
+}
+
+.left,
+.right {
+    padding: 2%;
+    margin: 2%;
+    float: left;
+}
+
+.todo {
+    background-color: rgba(193, 93, 47, 0.71);
+    border: 2px orangered solid;
+}
+
 .content {
-    width: 90%;
-    position: center;
     background-color: rgba(115, 180, 193, 0.71);
-    margin: 30px;
-    padding: 20px;
+    /*margin: 30px;*/
+    /*padding: 20px;*/
 }
 
 .menu {

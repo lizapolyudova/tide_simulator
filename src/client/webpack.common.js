@@ -3,9 +3,8 @@ const path = require('path')
 module.exports = {
     entry: {
         moon: './src/client/spheres/earth-moon-simple.ts',
-        trees: './src/client/trees-with-faces.ts',
+        common: './src/client/common.ts',
     },
-    // entry: './src/client/unit.ts',
     module: {
         rules: [
             {
