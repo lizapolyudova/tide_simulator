@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "@types/dat.gui": "^0.7.7",
+    "@types/node": "^18.15.11",
     "@types/three": "^0.149.0",
     "aws-sdk": ">= 2.0.9",
     "dat.gui": "^0.7.9",
+    "dotenv-webpack": "^8.0.1",
     "jquery": "^3.6.4",
     "three": "^0.150.1",
     "ts-loader": "^9.4.2",

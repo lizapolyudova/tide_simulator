@@ -16,7 +16,7 @@ $(function () {
     })
 })
 
-export function init() {
+export function setupMenu() {
     document.addEventListener('DOMContentLoaded', (event) => {
 
         var menu = document.createElement('div');

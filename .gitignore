@@ -4,3 +4,4 @@ demos/
 dist/client/bundle.js
 package-lock.json
 .env
+src/config.json
