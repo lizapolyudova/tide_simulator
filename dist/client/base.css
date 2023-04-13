@@ -40,14 +40,22 @@
 
 .menu {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #ffed2b;
 
 }
 
+.menu > .item {
+    width:90%;
+    border: 5px darkorange groove;
+    background-color: darkorange;
+    opacity: .6;
+    margin: 5px;
+    padding: 5px;
+}
 
 .menu > .item >  a {
-    color: rgba(42, 39, 39, 0.71);
+    color: darkblue;
     font-weight: bold;
     text-decoration: none;
 }
