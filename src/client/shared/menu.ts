@@ -7,11 +7,10 @@ var makeMenuItem = function (name: string, path: string) {
     return item
 }
 
-export function setupMenu() {
+export function initMenu() {
     document.addEventListener('DOMContentLoaded', (event) => {
 
         var menu = document.createElement('div');
-        menu.setAttribute("data-include", "menu");
         menu.setAttribute("class", "left menu");
         menu.appendChild(makeMenuItem("Home", "/"))
         var firstNode = document.body.getElementsByTagName("div").item(0);

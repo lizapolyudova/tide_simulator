@@ -1,3 +1,4 @@
+import  {initCommon} from "./common";
 
 var AWS = require('aws-sdk');
 AWS.config = new AWS.Config();
@@ -76,5 +77,5 @@ function initPage() {
     });
 }
 
-// initCommon();
 initPage();
+initCommon();

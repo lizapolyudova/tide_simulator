@@ -1,4 +1,4 @@
-import {init} from "./shared/menu";
+import {initMenu} from "./shared/menu";
 import * as $ from 'jquery';
 
 
@@ -11,8 +11,8 @@ import * as $ from 'jquery';
 
 console.log("hello");
 export function initCommon() {
-    console.log("hello");
-    init();
+    console.log("running 'initCommon'");
+    initMenu();
     document.addEventListener('DOMContentLoaded', (event) => {
         $('img[data-enlargable]').addClass('img-enlargable').click(function () {
             var src = $(this).attr('src');
@@ -31,4 +31,4 @@ export function initCommon() {
     });
 }
 
-initCommon();
+// initCommon();
