@@ -1,11 +1,12 @@
 const path = require('path')
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack'); // only add this if you don't have yet
+require('dotenv').config({path: '../.env'});
 
 module.exports = {
     entry: {
         moon: './src/client/spheres/earth-moon-simple.ts',
         common: './src/client/common.ts',
-        trees : './src/client/trees-with-faces.ts'
+        trees: './src/client/trees-with-faces.ts'
     },
     module: {
         rules: [
@@ -19,11 +20,16 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
-    plugins: [
-        new Dotenv,
-    ],
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../../dist/client'),
     },
+    plugins: [
+        // new webpack.ProvidePlugin({
+        //     process: 'process/browser',
+        // }),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(process.env),
+        }),
+    ]
 }

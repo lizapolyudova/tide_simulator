@@ -4,7 +4,7 @@
 
 ### Website
 
-- [ ] lock down the s3 bucket & figure out permissioning
+- [x] lock down the s3 bucket & figure out permissioning
 - [ ] trees with faces - add sketches which show up on top? overlay?
 - [ ] audio journaling - model after the syllabus project. make either interactive or make a flow chart. be instructive, follow your own instructions.
 
@@ -24,6 +24,17 @@
 
 ## Dailies
 
+### 13-04-2023
+
+Circling back after a bit of a break; much has happened, but also objectively nothing has changed.
+I did make it to Dublin successfully *woo* 
+
+Pulling data from S3 does not seem to work too well, I think maybe env vars are not successfully pulled into the app when deployed with Netlify? Would be good to get that working, don't want all data to be publically exposed.
+
+_looking through previous to-do list_
+
+yup, looks like sketch overlays for the trees would be next. 
+
 ### 29-03-2023
 
 Getting a bit out of control, since this is now becoming just a personal website instead of just a simulation. I might have to split things up a bit.
@@ -31,7 +42,6 @@ Getting a bit out of control, since this is now becoming just a personal website
 That being said, I am currently at https://pacific-snail.netlify.app
 
 Been working on it for the past two days.
-Adding some 
 
 ### 16-03-2023
 

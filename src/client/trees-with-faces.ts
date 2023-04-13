@@ -1,6 +1,3 @@
-import * as $ from "jquery";
-import {setupMenu} from "./shared/menu";
-
 
 var AWS = require('aws-sdk');
 AWS.config = new AWS.Config();
@@ -10,7 +7,7 @@ AWS.config.region = "us-east-1";
 var s3 = new AWS.S3();
 
 
-function init() {
+function initPage() {
     interface galleryItem {
         name: string,
         audio: boolean,
@@ -68,6 +65,7 @@ function init() {
   }
 ]`
         if (data != null) {
+            console.log("filling out gallery data");
             let items: Array<galleryItem> = JSON.parse(data);
             for (var item of items) {
                 gallery.appendChild(makeGalleryItem(item));
@@ -76,25 +74,7 @@ function init() {
             console.log("failed to read data");
         }
     });
-    setupMenu();
 }
 
-$(document).ready(function () {
-    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
-        console.log("function triggered");
-        var src = $(this).attr('src');
-        $('<div>').css({
-            background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
-            backgroundSize: 'contain',
-            width: '100%', height: '100%',
-            position: 'fixed',
-            zIndex: '10000',
-            top: '0', left: '0',
-            cursor: 'zoom-out'
-        }).click(function () {
-            $(this).remove();
-        }).appendTo('body');
-    });
-});
-
-init();
+// initCommon();
+initPage();
