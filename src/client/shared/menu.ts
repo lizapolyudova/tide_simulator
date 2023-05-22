@@ -17,6 +17,7 @@ export function initMenu() {
         menu.appendChild(makeMenuItem("    Trees with faces", "/trees-with-faces.html"))
         menu.appendChild(makeMenuItem("    Audio Journaling", "/audio-journal.html"))
         menu.appendChild(makeMenuItem("    Places on the Internet (webring)", "/places-on-the-internet.html"))
+        menu.appendChild(makeMenuItem("    Letters", "/letters.html"))
         var firstNode = document.body.getElementsByTagName("div").item(0);
         if (firstNode === null) {
             console.log("no children in the DOM")

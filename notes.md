@@ -24,6 +24,13 @@
 
 ## Dailies
 
+### 22-05-2023
+
+Been a while, working on this for a while today. Would like:
+
+* remove "todos" for non-dev build
+* change color scheme (ideally, randomize colors?)
+
 ### 13-04-2023
 
 Circling back after a bit of a break; much has happened, but also objectively nothing has changed.
