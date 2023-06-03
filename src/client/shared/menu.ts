@@ -14,9 +14,11 @@ export function initMenu() {
         menu.setAttribute("class", "left menu");
         menu.appendChild(makeMenuItem("Home", "/"))
         menu.appendChild(makeMenuItem("    Moon-Earth model", "/spheres.html"))
+        menu.appendChild(makeMenuItem("    Newgrange", "/newgrange.html"))
+        menu.appendChild(makeMenuItem("    Roofbox", "/roofbox.html"))
         menu.appendChild(makeMenuItem("    Trees with faces", "/trees-with-faces.html"))
         menu.appendChild(makeMenuItem("    Audio Journaling", "/audio-journal.html"))
-        menu.appendChild(makeMenuItem("    Places on the Internet (webring)", "/places-on-the-internet.html"))
+        menu.appendChild(makeMenuItem("    Places on the Internet", "/places-on-the-internet.html"))
         menu.appendChild(makeMenuItem("    Letters", "/letters.html"))
         var firstNode = document.body.getElementsByTagName("div").item(0);
         if (firstNode === null) {

@@ -6,9 +6,11 @@
 
 - [x] lock down the s3 bucket & figure out permissioning
 - [ ] trees with faces - add sketches which show up on top? overlay?
-- [ ] audio journaling - model after the syllabus project. make either interactive or make a flow chart. be instructive, follow your own instructions.
+- [ ] audio journaling - model after the syllabus project. make either interactive or make a flow chart. be instructive,
+  follow your own instructions.
 
 ### Moon Simulation
+
 - [ ] start/pause
 - [ ] toggleable printout for all coordinates
 
@@ -24,6 +26,14 @@
 
 ## Dailies
 
+### 03-06-2023
+
+Not necessarily moving on to the next project, just going where curiousity takes me. I've been thinking more about
+Newgrange and the role tracking the sun might have had for the newly non-nomadic people.
+
+Got a semi-working model of a house which I will then add a roofbox to and start with tracking the sunbeam. Will add a
+page on newgrange before I head out for the night, just so I start gathering some thoughts in the same place
+
 ### 22-05-2023
 
 Been a while, working on this for a while today. Would like:
@@ -33,18 +43,20 @@ Been a while, working on this for a while today. Would like:
 
 ### 13-04-2023
 
-Circling back after a bit of a break; much has happened, but also objectively nothing has changed.
-I did make it to Dublin successfully *woo* 
+Circling back after a bit of a break; much has happened, but also objectively nothing has changed. I did make it to
+Dublin successfully *woo*
 
-Pulling data from S3 does not seem to work too well, I think maybe env vars are not successfully pulled into the app when deployed with Netlify? Would be good to get that working, don't want all data to be publically exposed.
+Pulling data from S3 does not seem to work too well, I think maybe env vars are not successfully pulled into the app
+when deployed with Netlify? Would be good to get that working, don't want all data to be publically exposed.
 
 _looking through previous to-do list_
 
-yup, looks like sketch overlays for the trees would be next. 
+yup, looks like sketch overlays for the trees would be next.
 
 ### 29-03-2023
 
-Getting a bit out of control, since this is now becoming just a personal website instead of just a simulation. I might have to split things up a bit.
+Getting a bit out of control, since this is now becoming just a personal website instead of just a simulation. I might
+have to split things up a bit.
 
 That being said, I am currently at https://pacific-snail.netlify.app
 

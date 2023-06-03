@@ -5,6 +5,7 @@ require('dotenv').config({path: '../.env'});
 module.exports = {
     entry: {
         moon: './src/client/spheres/earth-moon-simple.ts',
+        roofbox: './src/client/roofbox/main.ts',
         simple: './src/client/simple.ts',
         trees: './src/client/trees-with-faces.ts'
     },
