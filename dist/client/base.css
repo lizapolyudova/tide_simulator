@@ -7,22 +7,10 @@
     color: white;
 }
 
-.left {
-    width: 10%;
-    height: 100%;
-    background-color: #5f8f60;
-}
-
-.right {
-    width: 70%;
-    height: 100%;
-}
-
-.left,
-.right {
-    padding: 2%;
-    margin: 2%;
-    float: left;
+.section {
+    height: auto;
+    overflow: auto;
+    /*padding-bottom: 10px;*/
 }
 
 .todo {
@@ -32,13 +20,30 @@
     border: 2px orangered solid;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+/*.column {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
 .content {
+    margin-left: 170px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
     background-color: rgba(115, 180, 193, 0.71);
+    /*display: block;*/
+    /*overflow: auto;*/
     /*margin: 30px;*/
     /*padding: 20px;*/
 }
 
 .menu {
+    z-index: 100;
+    width: 150px;
+    position: fixed;
     display: flex;
     flex-direction: column;
     background-color: #5f8f60;
@@ -46,16 +51,16 @@
 }
 
 .menu > .item {
-    width: 90%;
-    border: 5px darkorange groove;
-    background-color: darkorange;
-    opacity: .6;
+    width: 80%;
+    background-color: #e1c9ab;
+    opacity: 30%;
+    border-radius: 5px;
     margin: 5px;
     padding: 5px;
 }
 
 .menu > .item > a {
-    color: darkblue;
+    color: rgba(0, 0, 0, 0.71);
     font-weight: bold;
     text-decoration: none;
 }

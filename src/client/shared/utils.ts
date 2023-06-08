@@ -1,5 +1,13 @@
 import * as THREE from 'three';
 
+export function setupStats() {
+    let stats = document.createElement('div');
+    stats.className = "stats"
+    stats.innerHTML = "some stats here"
+    document.body.appendChild(stats);
+    return stats;
+}
+
 export function printCamera(camera: THREE.Camera, stats: Element) {
     var x = new THREE.Vector3()
     stats.innerHTML =

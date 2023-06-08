@@ -26,6 +26,34 @@
 
 ## Dailies
 
+### 04-06-2023
+
+This are going fairly well today! I figured out shadows (mostly by changing all PlaneGeomtery instances into BoxGeometry
+instances and configuring the properties accordingly). Current state: I have a working wodel of a house with a roofbox
+which creates a visible sun ray inside the house.
+
+Thing to work on:
+
+- [ ] closing the sides of the house / possibly creating the house model in blender instead?
+- [ ] getting sun to move along a configurable path, rather than simply going in a
+  circle [link](https://dustinpfister.github.io/2022/04/04/threejs-object3d-position/)
+- [ ] setting up location of the original camera correctly + possibly not allow to pass through walls?
+
+Parameterization:
+
+- [ ] camera switch: global vs. first person
+- [ ] manipulate time? idk. -> have a time control box and allow to input time which sets the sun on the curve
+  somewhere (possibly a more difficult feature)
+- [ ] better first person control, kinda awkward now
+
+Visual:
+
+- [ ] it would be good to experiment with textures
+- [ ] maybe add some furniture to the room (another opportunity to improve with blender)
+
+After that, I believe I should be ready to have a little writeup about my experience / talk about newgrange some more.
+Possibly move into making a model for the cave.
+
 ### 03-06-2023
 
 Not necessarily moving on to the next project, just going where curiousity takes me. I've been thinking more about

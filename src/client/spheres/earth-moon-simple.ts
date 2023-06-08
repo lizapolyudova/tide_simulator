@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import * as cameras from './cameras'
-import {printCamera} from "./utils";
+import {printCamera} from "../shared/utils";
 import {sun, earth, moon} from "./planets";
 import {moon_radius, earth_orbit_radius, moon_orbit_radius, daily_delta, moon_delta, earth_delta} from "./params";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";

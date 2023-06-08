@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import * as utils from './utils'
+import * as utils from '../shared/utils'
 import * as planets from "./planets";
 import {earth_radius} from "./params";
 

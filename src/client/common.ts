@@ -1,18 +1,11 @@
-import {initMenu} from "./shared/menu";
+import {generateImageLinks, initMenu} from "./shared/menu";
 import * as $ from 'jquery';
 
 
-// 'use strict';
-//
-// var AWS = require('aws-sdk');
-//
-// var s3 = new AWS.S3();
-//
-
-console.log("hello");
 export function initCommon() {
     console.log("running 'initCommon'");
     initMenu();
+    generateImageLinks("newgrange");
     document.addEventListener('DOMContentLoaded', (event) => {
         $('img[data-enlargable]').addClass('img-enlargable').click(function () {
             var src = $(this).attr('src');
