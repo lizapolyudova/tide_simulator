@@ -3,6 +3,7 @@ import * as THREE from "three";
 import * as params from "./params";
 import {moon_radius, sun_radius} from "./params";
 
+export var enableDebugAxis = true;
 
 // Sun
 var sunGeometry = new THREE.SphereGeometry(sun_radius, 50, 50);
@@ -65,6 +66,12 @@ var moonMaterial = new THREE.MeshPhongMaterial({
 
 var moon = new THREE.Mesh(moonGeometry, moonMaterial);
 var earth = new THREE.Mesh(earthGeometry, earthMaterial);
+
+if (enableDebugAxis) {
+    earth.add(new THREE.AxesHelper(5));
+    moon.add(new THREE.AxesHelper(5));
+    sun.add(new THREE.AxesHelper(20));
+}
 // earth.add(atmosphere);
 
 export {sun, earth, moon};

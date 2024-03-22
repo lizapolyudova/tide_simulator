@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+
 export function setupStats() {
     let stats = document.createElement('div');
     stats.className = "stats"

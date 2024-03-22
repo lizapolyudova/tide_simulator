@@ -15,17 +15,19 @@ var makeMenuItem = function (name: string, path: string) {
 
 export function initMenu() {
     document.addEventListener('DOMContentLoaded', (event) => {
-
+        // TODO: could this be auto-generated from the file list instead?
         var menu = document.createElement('div');
         menu.setAttribute("class", "left menu");
         menu.appendChild(makeMenuItem("Home", "/"))
-        menu.appendChild(makeMenuItem("    Moon-Earth model", "/spheres.html"))
-        menu.appendChild(makeMenuItem("    Newgrange", "/newgrange.html"))
-        menu.appendChild(makeMenuItem("    Roofbox", "/roofbox.html"))
-        menu.appendChild(makeMenuItem("    Trees with faces", "/trees-with-faces.html"))
-        menu.appendChild(makeMenuItem("    Audio Journaling", "/audio-journal.html"))
-        menu.appendChild(makeMenuItem("    Places on the Internet", "/places-on-the-internet.html"))
-        menu.appendChild(makeMenuItem("    Letters", "/letters.html"))
+        menu.appendChild(makeMenuItem("Moon-Earth model", "/spheres.html"))
+        menu.appendChild(makeMenuItem("Newgrange", "/newgrange.html"))
+        menu.appendChild(makeMenuItem("Roofbox", "/roofbox.html"))
+        menu.appendChild(makeMenuItem("Trees with faces", "/trees-with-faces.html"))
+        menu.appendChild(makeMenuItem("Audio Journaling", "/audio-journal.html"))
+        menu.appendChild(makeMenuItem("Places on the Internet", "/places-on-the-internet.html"))
+        menu.appendChild(makeMenuItem("Letters", "/letters.html"))
+        menu.appendChild(makeMenuItem("Car Accident - Granby", "/car-accident.html"))
+        menu.appendChild(makeMenuItem("3js sample", "/3js-sample.html"))
         var firstNode = document.body.getElementsByTagName("div").item(0);
         if (firstNode === null) {
             console.log("no children in the DOM")

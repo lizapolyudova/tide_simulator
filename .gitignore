@@ -1,7 +1,7 @@
 .idea/*
 node_modules/
 demos/
-dist/client/*bundle.js
+dist/
 package-lock.json
 .env
 src/config.json

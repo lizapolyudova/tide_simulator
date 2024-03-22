@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
 import * as cameras from './cameras'
-import {printCamera} from "../shared/utils";
-import {sun, earth, moon} from "./planets";
+import * as keys from "../shared/keys";
+import {sun, earth, moon, enableDebugAxis} from "./planets";
 import {moon_radius, earth_orbit_radius, moon_orbit_radius, daily_delta, moon_delta, earth_delta} from "./params";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import { GUI } from 'dat.gui';
-import {activeCam, moonCam, staticCam} from "./cameras";
+import {GUI} from 'dat.gui';
+import {activeCam, moonCam, earthCam, staticCam} from "./cameras";
 import * as planets from "./planets";
 
 
@@ -15,8 +15,7 @@ import * as planets from "./planets";
 //Camera, scene, and renderer
 var scene = new THREE.Scene();
 const loader = new THREE.TextureLoader();
-loader.load('https://c.pxhere.com/photos/1a/9d/stars_background_blue_photoshop_color_space_sky_dark-610854.jpg!d' , function(texture)
-{
+loader.load('https://c.pxhere.com/photos/1a/9d/stars_background_blue_photoshop_color_space_sky_dark-610854.jpg!d', function (texture) {
     console.log("ready!");
     scene.background = texture;
 });
@@ -28,7 +27,7 @@ document.body.appendChild(renderer.domElement);
 
 
 // light
-var bulbLight = new THREE.PointLight(0xffee88, 10, earth_orbit_radius * 2);
+var bulbLight = new THREE.PointLight(0xffee88, 20, earth_orbit_radius * 2);
 bulbLight.position.set(0, 0, 0);
 scene.add(bulbLight);
 
@@ -51,11 +50,15 @@ const earthOrbit = new THREE.Object3D();
 earthOrbit.position.set(sun.position.x, sun.position.y, sun.position.z);
 earthOrbit.add(earth);
 earthOrbit.add(moonOrbit);
+earthOrbit.add(earthCam);
 scene.add(earthOrbit);
 
 
+var timeProperties = new keys.TimeProperties(true, activeCam);
 
 function init() {
+    keys.timeControlKeyListener(timeProperties);
+
     cameras.helpers(scene, renderer);
     // call the render function
     render();
@@ -68,22 +71,29 @@ function init() {
 }
 
 
+var controls = new OrbitControls(staticCam, renderer.domElement);
 //Render loop
 var render = function () {
     cameras.updateSize(renderer)
 
 
     function calculateOrbits() {
-        var earth_axis = new THREE.Vector3(0, 1, -.1).normalize();
+        var earth_axis = new THREE.Vector3(0, 1, 0).normalize();
+        // earth_axis.applyAxisAngle()
         earth.rotateOnAxis(earth_axis, daily_delta);
         earthOrbit.rotateOnAxis(new THREE.Vector3(0, 1, 0), earth_delta);
         moonOrbit.rotateOnAxis(new THREE.Vector3(0, 1, .28).normalize(), moon_delta);
     }
 
-    calculateOrbits()
+    if (!timeProperties.timePaused) {
+        calculateOrbits()
+    }
+
+    // earthCam.lookAt(earth.position.x, earth.position.y, earth.position.z);
 
     cameras.setupCamera(scene, renderer, cameras.staticCam, 0);
-    cameras.setupCamera(scene, renderer, cameras.activeCam, 1);
+    cameras.setupCamera(scene, renderer, cameras.earthCam, 1);
+    // cameras.setupCamera(scene, renderer, cameras.activeCam, 1);
 };
 
 

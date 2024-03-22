@@ -7,7 +7,8 @@ module.exports = {
         moon: './src/client/spheres/earth-moon-simple.ts',
         roofbox: './src/client/roofbox/main.ts',
         simple: './src/client/simple.ts',
-        trees: './src/client/trees-with-faces.ts'
+        trees: './src/client/trees-with-faces.ts',
+        sample: './src/client/sample/main.ts'
     },
     module: {
         rules: [

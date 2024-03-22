@@ -2,14 +2,34 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {BufferGeometry, Mesh} from "three";
 import * as utils from '../shared/utils';
+import * as keys from '../shared/keys';
 import {VSMShadowMap} from "three/src/constants";
+import {FirstPersonControls} from "three/examples/jsm/controls/FirstPersonControls";
+import {PointerLockControls} from 'three/examples/jsm/controls/PointerLockControls'
+import {activeCam} from "../spheres/cameras";
+
+
+let raycaster: THREE.Raycaster;
+
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
+let canJump = false;
+
+let prevTime = performance.now();
+const velocity = new THREE.Vector3();
+const direction = new THREE.Vector3();
+
 
 THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1);
 
 var debugMode = true;
+var clock = new THREE.Clock();
 const scene = new THREE.Scene();
 const globalCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const firstPersonCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+firstPersonCamera.lookAt(1, 0, 0);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
@@ -21,20 +41,103 @@ document.body.appendChild(renderer.domElement);
 globalCamera.position.set(0, 10, 10);
 
 const stats = utils.setupStats();
+const walkSpeed = 2;
+const runSpeed = 4;
+var movementSpeed = 2;
+
 
 function setupControls() {
 
     // const controls = new OrbitControls(globalCamera, renderer.domElement);
-    const controls = new OrbitControls(firstPersonCamera, renderer.domElement);
-    controls.listenToKeyEvents(window);
+    // const camControls = new FirstPersonControls(firstPersonCamera, renderer.domElement);
+    // camControls.activeLook = true;
+    // camControls.movementSpeed = walkSpeed;
+    // // camControls.lookVertical = true;
+    // camControls.constrainVertical = true;
 
-    // // not sure if these settings are good, but at least the camera movement works
-    controls.enableDamping = false; // an animation loop is required when either damping or auto-rotation are enabled
-    controls.dampingFactor = 0.05;
-    controls.screenSpacePanning = false;
-    controls.maxPolarAngle = Math.PI / 2;
+    const controls = new PointerLockControls(firstPersonCamera, document.body);
+    scene.add(controls.getObject());
+    // controls.unlock();
 
-    controls.update();
+    const onKeyDown = function (event: KeyboardEvent) {
+
+        switch (event.code) {
+
+            case 'ArrowUp':
+            case 'KeyW':
+                moveForward = true;
+                break;
+
+            case 'ArrowLeft':
+            case 'KeyA':
+                moveLeft = true;
+                break;
+
+            case 'ArrowDown':
+            case 'KeyS':
+                moveBackward = true;
+                break;
+
+            case 'ArrowRight':
+            case 'KeyD':
+                moveRight = true;
+                break;
+
+            case 'Space':
+                if (canJump === true) velocity.y += 350;
+                canJump = false;
+                break;
+
+        }
+
+    };
+
+    const onKeyUp = function (event: KeyboardEvent) {
+
+        switch (event.code) {
+
+            case 'ArrowUp':
+            case 'KeyW':
+                moveForward = false;
+                break;
+
+            case 'ArrowLeft':
+            case 'KeyA':
+                moveLeft = false;
+                break;
+
+            case 'ArrowDown':
+            case 'KeyS':
+                moveBackward = false;
+                break;
+
+            case 'ArrowRight':
+            case 'KeyD':
+                moveRight = false;
+                break;
+
+        }
+
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keyup', onKeyUp);
+
+    raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
+
+
+    // controls.lookAt(1, 0, 0);
+
+    // const controls = new OrbitControls(firstPersonCamera, renderer.domElement);
+    // controls.listenToKeyEvents(window);
+    //
+    // // // not sure if these settings are good, but at least the camera movement works
+    // controls.enableDamping = false; // an animation loop is required when either damping or auto-rotation are enabled
+    // controls.dampingFactor = 0.05;
+    // controls.screenSpacePanning = false;
+    // controls.maxPolarAngle = Math.PI / 2;
+
+    controls.unlock();
     return controls
 }
 
@@ -84,9 +187,9 @@ function tested() {
     const roofBoxWidthRatio = .2;
     const roofBoxLengthRatio = .6;
     const slitRoofLength = roomLength / 2 * (1 - roofBoxWidthRatio);
-    const slitRoofWidth = roomWidth / 2 / Math.cos(roofAngle) * (1 - roofBoxLengthRatio) / 2;
-    const roofBoxPartialHorizontal = new THREE.PlaneGeometry(roomWidth / 2 / Math.cos(roofAngle), slitRoofLength, 100, 100);
-    const roofBoxPartialVertical = new THREE.PlaneGeometry(slitRoofWidth, roomLength - slitRoofLength * 2, 100, 100);
+    const slitRoofWidth = roofLength * (1 - roofBoxLengthRatio) / 2;
+    const roofBoxPartialHorizontal = new THREE.PlaneGeometry(roomWidth / 2 / Math.cos(roofAngle), slitRoofLength, 10, 10);
+    const roofBoxPartialVertical = new THREE.PlaneGeometry(slitRoofWidth, roomLength - slitRoofLength * 2, 10, 10);
 
     // this roof will have a box in it
     const roofBoxRight = prepSide(roofBoxPartialHorizontal);
@@ -97,12 +200,19 @@ function tested() {
     roofBoxLeft.rotation.y = roofAngle;
     roofBoxLeft.position.set(roomWidth - roomWidth / 4., slitRoofLength / 2, roomHeight + roomWidth * Math.tan(roofAngle) / 4.);
 
+    const roofBoxBelow = prepSide(roofBoxPartialVertical);
+    roofBoxBelow.rotation.y = roofAngle;
+    roofBoxBelow.position.set(
+        roomWidth - slitRoofWidth / 2,
+        roomLength / 2,
+        roomHeight + slitRoofWidth * Math.sin(roofAngle) / 2 + 0.01);
+
     const roofBoxAbove = prepSide(roofBoxPartialVertical);
     roofBoxAbove.rotation.y = roofAngle;
     roofBoxAbove.position.set(
-        roomWidth / 2. + roomWidth * Math.sin(roofAngle) * .2,
+        roomWidth / 2 + slitRoofWidth / 2,
         roomLength / 2,
-        roomHeight + roomWidth * Math.tan(roofAngle) * .8 / 2);
+        roomHeight + slitRoofWidth * Math.sin(roofAngle) / 2 + 0.01);
 
 
     const sideRoof = new THREE.BufferGeometry();
@@ -125,8 +235,7 @@ function tested() {
     sideRoof2.position.y = roomLength;
 
     firstPersonCamera.position.set(roomWidth * .8, roomLength * .2, roomHeight * .4);
-
-    house.add(firstPersonCamera);
+    // house.add(firstPersonCamera);
     scene.add(house);
 
 }
@@ -190,7 +299,9 @@ function setupMovementControls() {
 
 }
 
-var running = true;
+var timePaused = true;
+var isRunning = false;
+
 
 function setScene() {
     // static scene setup:
@@ -206,16 +317,7 @@ function setScene() {
 }
 
 function init() {
-
-    document.body.addEventListener('keyup', function (event) {
-        console.log(`key press: ${event.key}:\t${event.code}`);
-        if (event.code == 'Space') {
-            running = !running;
-        }
-        if (event.key == '?') {
-            console.log(`camera position: ${firstPersonCamera.position.x}, ${firstPersonCamera.position.y}, ${firstPersonCamera.position.z}`);
-        }
-    });
+    keys.timeControlKeyListener(new keys.TimeProperties(true, activeCam));
 
     const axesHelper = new THREE.AxesHelper(100);
     scene.add(axesHelper);
@@ -255,11 +357,66 @@ function animate() {
     if (debugMode) {
         utils.printCamera(firstPersonCamera, stats);
     }
-    if (running) {
+    if (!timePaused) {
         sunStep();
     }
+    movementSpeed = isRunning ? runSpeed : walkSpeed;
+
     requestAnimationFrame(animate);
-    controls.update();
+
+    // copied from
+    // https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_pointerlock.html#L105
+    const time = performance.now();
+
+    if (controls.isLocked === true) {
+
+        raycaster.ray.origin.copy(controls.getObject().position);
+        raycaster.ray.origin.y -= 10;
+
+        // const intersections = raycaster.intersectObjects(objects, false);
+
+        // const onObject = intersections.length > 0;
+
+        const delta = (time - prevTime) / 1000;
+
+        velocity.x -= velocity.x * 10.0 * delta;
+        velocity.z -= velocity.z * 10.0 * delta;
+
+        velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+        direction.z = Number(moveForward) - Number(moveBackward);
+        direction.x = Number(moveRight) - Number(moveLeft);
+        direction.normalize(); // this ensures consistent movements in all directions
+
+        if (moveForward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
+        if (moveLeft || moveRight) velocity.x -= direction.x * 400.0 * delta;
+
+        // if (onObject === true) {
+        //
+        //     velocity.y = Math.max(0, velocity.y);
+        //     canJump = true;
+        //
+        // }
+
+        controls.moveRight(-velocity.x * delta);
+        controls.moveForward(-velocity.z * delta);
+
+        controls.getObject().position.y += (velocity.y * delta); // new behavior
+
+        if (controls.getObject().position.y < 10) {
+
+            velocity.y = 0;
+            controls.getObject().position.y = 10;
+
+            canJump = true;
+
+        }
+
+    }
+
+    prevTime = time;
+
+
     renderer.render(scene, firstPersonCamera);
 }
 

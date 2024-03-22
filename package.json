@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack build --config ./src/client/webpack.dev.js",
+    "build": "webpack build --config ./src/client/webpack.dev.js && cp -r ./src/static/* ./dist/client/",
     "prod": "webpack serve --config ./src/client/webpack.dev.js",
     "dev": "webpack serve --config ./src/client/webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"

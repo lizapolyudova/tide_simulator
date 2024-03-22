@@ -26,6 +26,30 @@
 
 ## Dailies
 
+### 04-07-2023
+
+Talked to Kate couple of days ago, I think it would be a good start in terms of improving usability to get the moon simulation to be an illustration for intro to phases of the moon, as well as how the sunrise/sunset times interact with moonrise/moonset. Simplified, of course.
+
+Inspiration [earth simulation](https://drajmarsh.bitbucket.io/earthsun.html)
+
+I really love the example above for the following reasons:
+* intuitive controls
+* side sliders representing times
+* ability to switch between cameras dynamically
+
+Something to start with would be:
+
+- [ ]stop/start
+- [ ]side slides representing 8 distinct phases, which are in sync with the moon angle. 
+- [ ] default camera should be showing earth and the moon, sun not included
+
+optional:
+- [ ] better earth texture? (or none at all..)
+
+### 14-06-2023
+
+Carryinig over items from last time. Working from an outdoor space in NYC today, enjoying the weather. Feeling like I am doing more talking than making recently, so catching up with some work today. Hoping to get the walking controls working, since I have a [good working example to go off of](https://threejs.org/examples/?q=controls#misc_controls_pointerlock).
+
 ### 04-06-2023
 
 This are going fairly well today! I figured out shadows (mostly by changing all PlaneGeomtery instances into BoxGeometry
